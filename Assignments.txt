@@ -1,0 +1,1356 @@
+SQL Assignments:
+
+1)CREATE TABLE:
+
+CREATE TABLE Programmer (
+    Programmer_Name VARCHAR(8) NOT NULL,
+    DOB DATE NOT NULL,
+    DOJ DATE NOT NULL,
+    Sex VARCHAR(1) NOT NULL, 
+    Prof1 VARCHAR(8),
+    Prof2 VARCHAR(8),
+    Salary numeric (4) NOT NULL
+);
+
+
+CREATE TABLE Software (
+    Software_Name VARCHAR(8) NOT NULL,
+    Title VARCHAR(20) NOT NULL,
+    Dev_in  VARCHAR(8) NOT NULL,
+    Scost numeric (7,2),
+    Dcost numeric (5),
+    Sold numeric (3)
+);
+
+
+CREATE TABLE Studies (
+    SName VARCHAR(8) NOT NULL,
+    Splace VARCHAR(9) NOT NULL,
+    course VARCHAR(5) NOT NULL,
+    ccost  numeric (5) Not Null 
+    );
+
+
+
+Query 1:
+
+1) Select avg(sold) as SELLING_COST_AVERAGE from software
+where Dev_in = "Python";
+
+Result:
+SELLING_COST_AVERAGE
+'38.0000'
+
+
+2)Select programmer_name, floor(DATEDIFF(CURDATE(),DOB)/365)as age 
+from Programmer;
+
+Result:
+vikram	53
+suman	      54
+somdutt	58
+rahul	      58
+neha	      52
+meena	      56
+kavita	54
+anil	      57
+
+3)Select programmer_name, floor(DATEDIFF(CURDATE(),DOB)/365)as age 
+from Programmer
+Where prof1 = "cobol";
+
+Result:
+anil	57
+
+
+4)Select max(sold) as Max_copy_sold
+from software;
+
+Result:
+64
+
+5)Select programmer_name, dob from programmer
+where month(DOB) = 4;
+
+Result:
+'somdutt', '1966-04-21'
+
+6)select min(ccost) as minimum_course_cost from studies;
+
+result:
+3200
+
+7)select count(Course) from Studies
+where course = "pgdca";
+
+Result:
+2
+
+
+8)select sum(scost*sold) from Software
+where dev_in = "python";
+
+Result:
+17100.00
+
+9)select Dev_in from software
+where Software_Name  = "neha";
+
+Result:
+java
+
+10)select count(Programmer_Name) as Count_of_Java from Programmer
+where prof2 = "Java";
+
+Result:
+2
+
+11) select * from Studies
+where ccost > 4000;
+
+Result:
+
+somdutt	sabhari	pgdca	4500
+devdutt	bdps	dcs	5000
+meena	chennai	msc	5500
+kavita	delhi	mba	6200
+rahul	mumbai	be	7000
+vikram	kolkata	mca	4800
+somdutt	sabhari	pgdca	4500
+devdutt	bdps	dcs	5000
+meena	chennai	msc	5500
+kavita	delhi	mba	6200
+rahul	mumbai	be	7000
+vikram	kolkata	mca	4800
+
+12) select Software_Name, Title, CEIL(dcost/scost) as copies_cost
+from software;
+
+result:
+
+somdutt	parachutes	16
+anil	windstorm	16
+meena	sunrise	18
+kavita	blueprint	16
+rahul	thunderbolt	14
+vikram	nightshade	13
+neha	horizon	18
+suman	zenith	17
+
+
+13) select max(scost) as costliest_software
+from Software
+where dev_in = "python";
+
+Result:
+450.00
+
+14) SELECT *
+FROM Software
+WHERE (scost * sold) >= dcost;
+
+Result: 
+
+somdutt	parachutes	basic	399.95	6000	43
+anil	windstorm	cobol	499.99	7500	55
+meena	sunrise	java	299.50	5200	60
+kavita	blueprint	python	450.00	6800	38
+rahul	thunderbolt	c	599.99	8000	25
+vikram	nightshade	perl	350.75	4300	47
+neha	horizon	java	275.25	4900	64
+suman	zenith	ruby	425.50	7000	50
+
+
+15) SELECT count(Dev_in) as total_Packages from Software;
+
+result: 8
+
+16) select count(programmer_name) as programmers_Studied from programmer
+where prof1 = "SQL";
+
+Result: 1
+
+17) select count(programmer_name) as programmers_salary from programmer
+where salary between 3200 and 3500;
+
+Result:
+6
+
+18) select avg(ccost) as average_course_fee from studies;
+
+Result: 4962.5000
+
+19) select count(programmer_name) from programmer 
+where prof1 = "SQL" or prof2 = "SQL";
+
+Result: 1
+
+20) select count(programmer_name) from programmer 
+where prof1 in ("SQL","Python") or Prof2 in ("SQL","Python");
+
+result: 2
+
+21) select count(programmer_name) from programmer 
+where prof1 not in ("SQL","Python") or Prof2 not in ("SQL","Python");
+
+Result: 8
+
+22) select programmer_name,  floor(datediff(curdate(),dob)/365) as age from programmer
+where sex = "M"
+order by age desc
+Limit 1;
+
+Result: somdutt	58
+
+23) select avg(floor(datediff(curdate(),dob)/365)) as age from programmer
+where sex = "F";
+
+Result: 54
+
+
+24) select programmer_name,  floor(datediff(curdate(),doj)/365) as Experience from programmer
+order by experience desc;
+
+result: 
+somdutt	32
+rahul	32
+anil	31
+meena	30
+suman	29
+kavita	28
+vikram	28
+neha	27
+
+25) select programmer_name, DOB from programmer
+where month(DOB) = month(curdate());
+
+Result: kavita	1970-08-19
+
+26) select count(programmer_name) from programmer
+where sex = "F";
+
+Result: 3
+
+27) select programmer_name, prof1, prof2 from programmer
+where sex = "M";
+
+Result: 
+somdutt	pascal	basic
+anil	cobol	java
+rahul	vb	c#
+vikram	sql	perl
+suman	php	ruby
+
+28) select avg(salary) as AVG_Salary from programmer;
+
+Result: 3425.0000
+
+29) select count(salary) from programmer
+where Salary between 3300 and 3500;
+
+Result: 4
+
+30) Select * from programmer
+where prof1 not in ("Java", "Sql", "Python") and Prof2 not in ("Java", "sql", "Python");
+
+Result: 
+
+JohnDoe	1988-05-23	2015-04-12	M	12345678	HR	4500.00	101
+JaneDoe	1990-07-14	2017-08-22	F	87654321	Finance	5200.50	102
+SamSmith	1985-11-30	2013-02-01	M	23456789	IT	4900.75	103
+AnnaBell	1992-01-17	2018-09-15	F	34567890	Marketin	4700.30	104
+MikeRoss	1987-09-10	2012-06-25	M	45678901	Legal	5100.25	105
+EvaGreen	1993-03-12	2019-01-10	F	56789012	Finance	4300.60	106
+LeoNash	1989-10-05	2014-07-20	M	67890123	IT	4800.80	107
+SaraLee	1991-04-08	2016-11-28	F	78901234	HR	4600.45	108
+Ryan	1993-06-29	2024-08-24	M	77265705	Finance	7000.00	109
+
+31) Select count(*) from programmer
+where sex = "F"
+and prof1 in ("Java") or Prof2 in ("Java") and floor(datediff(curdate(),dob)/365) > 24;
+
+Result:3
+
+32) SELECT programmer_name, DOB
+FROM Programmer
+WHERE (MONTH(DOB) = MONTH(CURDATE()) AND DAY(DOB) BETWEEN DAY(CURDATE()) AND DAY(CURDATE()) + 7);
+
+33) Select * from Programmer
+where floor(datediff(curdate(), DOJ)/365) < 1;
+
+34) SELECT *
+FROM Programmer
+WHERE 
+    YEAR(CURDATE()) = YEAR(DATE_ADD(DOJ, INTERVAL 2 YEAR))
+    AND 
+    DATE_ADD(DOJ, INTERVAL 2 YEAR) <= CURDATE();
+
+35) select Software_Name, Title,Dev_in, (dcost-(scost*sold)) as not_recovered
+from software
+where (scost*sold) < dcost;
+
+36) Select * from software where sold=0;
+
+37) select Software_Name, Scost from software
+where Software_Name = "meena";
+
+Result: meena	299.50
+
+38) select distinct Splace from studies;
+
+Result: 
+sabhari
+bdps
+trichy
+chennai
+delhi
+mumbai
+kolkata
+hyderabad
+
+39) select count(distinct course) from studies;
+
+Result: 8
+
+40) SELECT programmer_name
+FROM Programmer
+WHERE LENGTH(programmer_name) - LENGTH(REPLACE(programmer_name, 'A', '')) = 2;
+
+41) select programmer_name from programmer
+where length(programmer_name)=5;
+
+Result: 
+meena
+rahul
+suman
+
+42) Select count(programmer_name) from programmer
+where sex = "F" and (prof1 = "python" or prof2 = "python")
+and datediff(curdate(),doj) > 730;
+
+Result: 2
+
+43) select min(length(programmer_name)) from programmer;
+
+Result: 4
+
+44) select avg(Dcost) from Software
+where Title = "cobol";
+
+45) select programmer_name as Name,
+sex as Gender,
+date_format(DOB, '%d/%m/%y') As date_of_birth,
+date_format(DOJ, '%d/%m/%y') as date_of_Joining from programmer;
+
+Result: 
+somdutt	m	21/04/66	21/04/92
+anil	m	15/03/67	12/05/93
+meena	f	25/06/68	30/07/94
+kavita	f	19/08/70	10/09/95
+rahul	m	30/11/65	01/12/91
+vikram	m	10/02/71	05/03/96
+neha	f	17/05/72	20/06/97
+suman	m	22/09/69	15/10/94
+
+46) select * from programmer
+where DOB = day(Last_DAY(DOB));
+
+47) SELECT SUM(salary) AS total_salaries
+FROM Programmer
+WHERE sex = 'M'
+AND (Prof1 != 'COBOL' AND Prof2 != 'COBOL');
+
+Result: 13650
+
+47) SELECT SUM(salary) AS total_salaries
+FROM Programmer
+WHERE sex = 'M'
+AND (Prof1 != 'python' AND Prof2 != 'python');
+
+48) select Title, Scost, Dcost, (Scost -Dcost) as difference from software
+order by difference desc;
+
+result:
+nightshade	350.75	4300	-3949.25
+horizon	275.25	4900	-4624.75
+sunrise	299.50	5200	-4900.50
+parachutes	399.95	6000	-5600.05
+blueprint	450.00	6800	-6350.00
+zenith	425.50	7000	-6574.50
+windstorm	499.99	7500	-7000.01
+thunderbolt	599.99	8000	-7400.01
+
+49) select Programmer_name, DOB, DOJ from Programmer
+where month(DOB) = month(DOJ);
+
+Result: somdutt	1966-04-21	1992-04-21
+
+50) select title from software
+where Title like "% %";
+
+Query 2:
+
+1) select distinct Dev_in as Language, (select count(*) from software s2 where s2.Dev_in = s1.dev_in) 
+As number_of_package from software s1;
+
+result: 
+basic	1
+cobol	1
+java	2
+python	1
+c	1
+perl	1
+ruby	1
+
+2)select distinct software_name AS Developer,( select count(*) from software s2 
+where S2.software_name = s1.software_name) as count_of_person from software s1;
+
+Result:
+
+somdutt	1
+anil	1
+meena	1
+kavita	1
+rahul	1
+vikram	1
+neha	1
+suman	1
+
+3) select distinct sex ,(select count(*) from programmer p2 where p2.sex=p1.sex) as num_programmers
+from programmer p1;
+
+Result: 
+m	5
+f	3
+
+4) select dev_in as language, (select title from software s2 where s2.dev_in = s1.dev_in order by scost limit 1) as COSTLIEST_packages,
+(select title from software s3 where s3.dev_in = s1.dev_in order by sold limit 1) as HIGEST_selling
+from software as s1
+group by dev_in;
+
+result:
+
+basic	parachutes	parachutes
+cobol	windstorm	windstorm
+java	horizon	sunrise
+python	blueprint	blueprint
+c	thunderbolt	thunderbolt
+perl	nightshade	nightshade
+ruby	zenith	zenith
+
+5) select year(DOB) as Birth_year, count(*) as Number_of_people
+from programmer
+group by year(dob);
+
+Result: 
+1966	1
+1967	1
+1968	1
+1970	1
+1965	1
+1971	1
+1972	1
+1969	1
+
+6) select year(DOJ) as joining_year, count(*) as Number_of_employees
+from programmer
+group by year(DOJ);
+
+Result: 
+1992	1
+1993	1
+1994	2
+1995	1
+1991	1
+1996	1
+1997	1
+
+7) select monthname(DOB) as Born_month, count(*) as No_of_Person
+from programmer group by month(DOB), monthname(dob);
+
+Result:
+April	1
+March	1
+June	1
+August	1
+November	1
+February	1
+May	1
+September	1
+
+8) select monthname(DOJ) as Month_joining, count(*) as Number_of_employees
+from programmer group by month(DOJ), monthname(DOJ);
+
+Result:
+April	1
+May	1
+July	1
+September	1
+December	1
+March	1
+June	1
+October	1
+
+9) select prof1 as language, count(*) as count_of_programmer from programmer
+group by Prof1;
+
+Result:
+pascal	1
+cobol	1
+c	1
+java	1
+vb	1
+sql	1
+html	1
+php	1
+
+10) select prof2 as language, count(*) as count_of_programmer from programmer
+group by Prof2;
+
+Result: 
+basic	1
+java	2
+python	1
+c++	1
+c#	1
+perl	1
+ruby	1
+
+11) select salary, count(*) as Number_of_People from programmer
+group by Salary;
+
+Result:
+
+3200	1
+3500	1
+3400	1
+3600	1
+3300	1
+3700	1
+3250	1
+3450	1
+
+12) select splace, count(*) as Number_of_People  from studies
+group by splace;
+
+Result:
+sabhari	2
+bdps	2
+trichy	2
+chennai	2
+delhi	2
+mumbai	2
+kolkata	2
+hyderabad	2
+
+13) select course, count(*) as Number_of_people from studies
+group by course;
+
+Result: 
+pgdca	2
+dcs	2
+bcom	2
+msc	2
+mba	2
+be	2
+mca	2
+bba	2
+
+14) select Title as language, sum(Dcost) as TOTAL_development_COST
+from software group by title;
+
+Result:
+parachutes	6000
+windstorm	7500
+sunrise	5200
+blueprint	6800
+thunderbolt	8000
+nightshade	4300
+horizon	4900
+zenith	7000
+
+15) select dev_in as language, sum(scost) as Total_cost from software group by dev_in; 
+
+Result:
+basic	399.95
+cobol	499.99
+java	574.75
+python	450.00
+c	599.99
+perl	350.75
+ruby	425.50
+
+16) select Software_Name as developer, sum(Dcost) as total_development_cost from software 
+group by Software_Name;
+
+Result:
+somdutt	6000
+anil	7500
+meena	5200
+kavita	6800
+rahul	8000
+vikram	4300
+neha	4900
+suman	7000
+
+17) select software_name as Programmer, sum(scost) as cost_package from software
+group by software_name;
+
+Result:
+somdutt	399.95
+anil	499.99
+meena	299.50
+kavita	450.00
+rahul	599.99
+vikram	350.75
+neha	275.25
+suman	425.50
+
+18) select software_name as Programmer,  count(*) as Number_of_package from software
+group by software_name;
+
+Result:
+somdutt	1
+anil	1
+meena	1
+kavita	1
+rahul	1
+vikram	1
+neha	1
+suman	1
+
+19) select Dev_in as language, sum(scost) as selling_cost from software
+group by Dev_in;
+
+Result:
+basic	399.95
+cobol	499.99
+java	574.75
+python	450.00
+c	599.99
+perl	350.75
+ruby	425.50
+
+20) select Software_Name as  programmers_name , max(scost) as costliest_package, min(scost) cheapest_packages from software
+group by Software_Name;
+
+21) select dev_in as Language, avg(Dcost) as development_cost,
+avg(scost) as AVERAGE_cost,
+avg (scost/sold) as AVERAGE_price_per_copy from software
+group by Dev_in;
+
+Result:
+
+basic	6000.0000	399.950000	9.3011630000
+cobol	7500.0000	499.990000	9.0907270000
+java	5050.0000	287.375000	4.6462240000
+python	6800.0000	450.000000	11.8421050000
+c	8000.0000	599.990000	23.9996000000
+perl	4300.0000	350.750000	7.4627660000
+ruby	7000.0000	425.500000	8.5100000000
+
+22) select splace as institute_name, count(course) as NUMBER_of_courses, avg(ccost) as AVERAGE_cost
+from Studies group by splace;
+
+Result:
+
+sabhari	2	4500.0000
+bdps	2	5000.0000
+trichy	2	3200.0000
+chennai	2	5500.0000
+delhi	2	6200.0000
+mumbai	2	7000.0000
+kolkata	2	4800.0000
+hyderabad	2	3500.0000
+
+23) select splace as institute_name, count(sname) as number_of_students from Studies group by splace;
+
+Result:
+
+sabhari	2
+bdps	2
+trichy	2
+chennai	2
+delhi	2
+mumbai	2
+kolkata	2
+hyderabad	2
+
+24) select programmer_name, sex from programmer
+where sex in ("M","F");
+
+Result:
+
+somdutt	m
+anil	m
+meena	f
+kavita	f
+rahul	m
+vikram	m
+neha	f
+suman	m
+
+25) select Software_Name, Title as Package from software;
+
+Result:
+somdutt	parachutes
+anil	windstorm
+meena	sunrise
+kavita	blueprint
+rahul	thunderbolt
+vikram	nightshade
+neha	horizon
+suman	zenith
+
+26) SELECT Dev_in as language_name, (select count(*) from software s where s.Dev_in = t.dev_in)
+from software t
+group by Dev_in;
+
+Result:
+basic	1
+cobol	1
+java	2
+python	1
+c	1
+perl	1
+ruby	1
+
+27) select dev_in as language, (select count(*) from software s
+where s.dev_in = d.Dev_in and s.dcost < 300) as NUMBER_of_packages
+from software d
+group by dev_in;
+
+28)select dev_in as language, avg(scost-dcost) as AVERAGE_BETWEEN from software 
+group by dev_in;
+
+Result:
+basic	-5600.050000
+cobol	-7000.010000
+java	-4762.625000
+python	-6350.000000
+c	-7400.010000
+perl	-3949.250000
+ruby	-6574.500000
+
+29) select Software_Name as programmer , sum(Scost) as Total_software_cost,
+sum(dcost) as Total_development_cost,
+sum(scost-dcost) as To_recovered from software where scost < dcost
+group by Software_Name;
+
+result:
+somdutt	399.95	6000	-5600.05
+anil	499.99	7500	-7000.01
+meena	299.50	5200	-4900.50
+kavita	450.00	6800	-6350.00
+rahul	599.99	8000	-7400.01
+vikram	350.75	4300	-3949.25
+neha	275.25	4900	-4624.75
+suman	425.50	7000	-6574.50
+
+30)select  max(salary), min(salary), avg(salary) from programmer
+where salary < 3500;
+
+Result: 3450	3200	3320.0000
+
+
+Query 3:
+
+1) Select programmer_name , Salary as High_paid from programmer
+where (prof1 ="Python" or prof2 ="Python")
+order by Salary desc
+Limit 1;
+
+Result: meena	3400
+
+2) Select programmer_name , Salary, sex as High_paid from programmer
+where (prof1 ="Python" or prof2 ="Python") and Sex = "F"
+order by Salary desc
+Limit 1;
+
+Result: meena	3400	f
+
+3) select programmer_name, prof1, Max(salary) as High_paid from programmer
+group by programmer_name, prof1;
+
+Result: somdutt	pascal	3200
+anil	cobol	3500
+meena	c	3400
+kavita	java	3600
+rahul	vb	3300
+vikram	sql	3700
+neha	html	3250
+suman	php	3450
+
+4) select programmer_name, floor(datediff(curdate(),doj)/365) as Years_Experience from programmer
+order by doj asc
+limit 1;
+
+Result:
+rahul	32
+
+5) select programmer_name,doj, floor(datediff(curdate(),doj)/365) as Years_Experience from programmer
+order by doj desc
+limit 1;
+
+Result:
+
+neha	1997-06-20	27
+
+6)select Language, count(*) as number_of_programmer
+ from (select Prof1 as Language from programmer union all select Prof2 as Language from programmer) as all_language
+ group by Language
+ having number_of_programmer = 1;
+
+Result:
+pascal	1
+cobol	1
+c	1
+vb	1
+sql	1
+html	1
+php	1
+basic	1
+python	1
+c++	1
+c#	1
+perl	1
+ruby	1
+ 
+7)select programmer_name,dob, floor(datediff(curdate(),dob)/365) as age from programmer
+order by dob desc
+limit 1;
+
+Result:
+neha	1972-05-17	52
+
+8)select splace, count(*) as count_of_students from studies
+group by splace
+order by count_of_students desc Limit 1;
+
+Result:
+sabhari	2
+
+9) Doubt
+
+10) select programmer_name, sex, salary, prof1, prof2 from programmer
+where sex ="F" and Salary > 3200 and (Prof1 not in ("basic","Python","Java") and Prof2 not in ("basic","Python","Java"));
+
+11) select course, Max(ccost) as costliest_course from studies
+group by course
+order by costliest_course desc limit 1 ;
+
+Result: BE	7000
+
+12) select course, count(*) as Num_of_students from studies
+group by course
+order by Num_of_students desc limit 1;
+
+Result: mba	3
+
+13) select splace as Instution, course , ccost from studies
+where ccost < (select avg(ccost) from studies);
+
+Result:
+
+sabhari	pgdca	4500
+trichy	bcom	3200
+kolkata	mca	4800
+hyderabad	bba	3500
+sabhari	pgdca	4500
+trichy	bcom	3200
+kolkata	mca	4800
+hyderabad	bba	3500
+Chennai	MBA	4300
+
+14)select splace as Instution, max(ccost) as costliest_course from studies
+group by splace
+order by costliest_course desc limit 1;
+
+Result:
+
+mumbai	7000
+
+15) select course, count(*) as Number_students from studies
+group by course
+having count(*) < (select avg(Number_students) from (select count(*) as Number_students from studies group by course)as sub_query); 
+
+Result:
+
+pgdca	2
+dcs	2
+bcom	2
+msc	2
+be	2
+mca	2
+bba	2
+
+16) select splace as Instution, course as Course_Conducted from studies;
+
+result:
+
+sabhari	pgdca
+bdps	dcs
+trichy	bcom
+chennai	msc
+delhi	mba
+mumbai	be
+kolkata	mca
+hyderabad	bba
+sabhari	pgdca
+bdps	dcs
+trichy	bcom
+chennai	msc
+delhi	mba
+mumbai	be
+kolkata	mca
+hyderabad	bba
+Chennai	MBA
+
+17) Select course, ccost from studies
+where abs(ccost - (select avg(ccost) from studies)) <= 1000;
+
+Result:
+pgdca	4500
+dcs	5000
+msc	5500
+mca	4800
+pgdca	4500
+dcs	5000
+msc	5500
+mca	4800
+MBA	4300
+
+18) select Title as package, max(Dcost) as High_devlopment_cost from software
+group by Title
+order by High_devlopment_cost desc limit 1; 
+
+Result:
+thunderbolt	8000
+
+19) select Title as package, min(scost) as Minimum_selling_cost from software
+group by title
+order by Minimum_selling_cost asc limit 1;
+
+Result:
+horizon	275.25
+
+20) select Software_Name as Developer, min(sold) as Least_sold from software
+group by Software_Name
+order by Least_sold asc limit 1;
+
+Result:
+rahul	25
+
+21) select Dev_in, scost as package from software
+where Scost = (select max(Scost) from software);
+
+Result: c	599.99
+
+22) select sold from software where (scost-dcost) = (select min(scost-dcost) from software);
+
+Result: 25
+
+23) select dev_in, max(dcost) as costliest_package from software
+where Dev_in = "Java"
+group by Dev_in;
+
+Result:
+java	5200
+
+24) select dev_in as Language from software
+group by Dev_in
+order by count(*) desc limit 1;
+
+Result: Java
+
+25) select Software_Name as developer, count(*) as Higest_package from software
+group by Software_Name
+order by count(*) desc limit 1;
+
+result:
+
+somdutt	1
+
+26) select Software_Name as author, max(scost) as COSTLIEST_package from software
+group by Software_Name
+order by COSTLIEST_package desc limit 1;
+
+Result: rahul	599.99
+
+27) select dev_in, sold from software
+where sold < (select avg(sold) from software);
+
+Result:
+basic	43
+python	38
+c	25
+perl	47
+
+28) select programmer_name as  programmers, sex, salary from programmer
+where sex = "F" and salary > ( select max(salary) from programmer where sex = "M");
+
+29) SELECT Prof1 AS Language, COUNT(*) AS Number_of_Programmers
+FROM Programmer
+GROUP BY Prof1
+ORDER BY Number_of_Programmers DESC
+LIMIT 1;
+
+Result: html	2
+
+
+30) select Software_Name as author, dcost, scost from software
+where scost > 2 * dcost;
+
+31) select Software_Name as Programmer_name , min(dcost) as minimum_dcost from software
+group by Software_Name
+order by minimum_dcost asc limit 1;
+
+Result: 
+vikram	4300
+
+32) select programmer_name, dob as youngest_programmer from programmer
+where year(DOB) = 1965 and  sex= "M"
+order by youngest_programmer desc limit 1;
+
+Result: rahul	1965-11-30
+
+33) select Software_Name as Programmer, dev_in as Language , 
+max(scost) as higest_selling, min(scost) as Lowest_selling from software
+group by Programmer, Dev_in;
+
+Result:
+somdutt	basic	399.95	399.95
+anil	cobol	499.99	499.99
+meena	java	299.50	299.50
+kavita	python	450.00	450.00
+rahul	c	599.99	599.99
+vikram	perl	350.75	350.75
+neha	java	275.25	275.25
+suman	ruby	425.50	425.50
+Jegan	python	455.00	455.00
+
+34) select programmer_name, sex, doj from programmer
+where sex = "F" and year(doj) = 1994;
+
+Result:
+meena	f	1994-07-30
+
+35) select year(dob), count(*) as Number_programmers from programmer
+group by year(dob)
+order by Number_programmers desc limit 1;
+
+Result:
+1967	2
+
+36) select year(DOJ) as Date_of_joining, count(*) as Number_of_programmer from programmer
+group by year(DOJ)
+order by Number_of_programmer desc limit 1;
+
+Result:
+1994	3
+
+37) select language, count(*) as number_of_programmer from 
+( select Prof1 as Language from programmer union all select Prof2 as language from programmer) as all_language
+group by language
+order by number_of_programmer desc limit 1;
+
+Result:
+java	3
+
+38) select programmer_name , sex, salary from programmer
+where sex = "M" and salary < (select avg(Salary) from programmer where sex = "F");
+
+Result: 
+somdutt	m	3200
+rahul	m	3300
+Jegan	m	3300
+
+Query 4:
+
+1) 
+select salary, group_concat(programmer_name separator "," ) as Name_of_programmer from programmer
+group by salary
+having	count(*) = 2;
+
+Result: 3300	rahul,Jegan
+
+
+2) Select * from programmer where sex = "M" and salary > 3200;
+
+Result:
+anil	1967-03-15	1993-05-12	m	cobol	java	3500
+rahul	1965-11-30	1991-12-01	m	vb	c#	3300
+vikram	1971-02-10	1996-03-05	m	sql	perl	3700
+suman	1969-09-22	1994-10-15	m	php	ruby	3450
+Jegan	1967-04-21	1994-04-21	m	html	Python	3300
+
+
+3) select * from programmer where (Prof1 = "Python" or Prof2 = "Python") and sex = "F";
+
+Result: meena	1968-06-25	1994-07-30	f	c	python	3400
+
+
+4)select * from programmer where DOJ < "1994-01-01";
+
+Result: 
+somdutt	1966-04-21	1992-04-21	m	pascal	basic	3200
+anil	1967-03-15	1993-05-12	m	cobol	java	3500
+rahul	1965-11-30	1991-12-01	m	vb	c#	3300
+
+5) select s.* from software s join programmer P on P.programmer_name = s.Software_Name
+where s.Dev_in = "Python" and p.sex = "F" and s.Title = "blueprint";
+
+result: kavita	blueprint	python	450.00	6800	38
+
+6) select p.programmer_name as Programmer, sum(s.sold) as sold_copies,
+count(s.sold) as Count_copies, sum(s.sold) as Total_copies from programmer p
+join software s on p.programmer_name = s.Software_Name
+group by p.Programmer_Name
+order by p.Programmer_Name;
+
+result: 
+anil	55	1	55
+Jegan	48	1	48
+kavita38	1	38
+meena	60	1	60
+neha	64	1	64
+rahul	25	1	25
+somdutt43	1	43
+suman	50	1	50
+vikram47	1	47
+
+7) select s.Dev_in, s.scost,s.Dcost,s.Sold, P.sex from software s join programmer p on p.Programmer_Name = s.Software_Name
+where p.Sex = "M" and dev_in = "java"
+and p.Prof1 =(select Prof1 from programmer group by Prof1 order by count(*) desc Limit 1);
+
+8) select s.*, p.sex, p.dob from software s join programmer p on p.Programmer_Name = s.Software_Name
+where (p.sex = "M" and p.dob < "1970-01-01") or (p.sex = "F" and p.dob < "1977-01-01");
+
+result:
+somdutt	parachutes	basic	399.95	6000	43	m	1966-04-21
+anil	windstorm	cobol	499.99	7500	55	m	1967-03-15
+meena	sunrise	java	299.50	5200	60	f	1968-06-25
+kavita	blueprint	python	450.00	6800	38	f	1970-08-19
+rahul	thunderbolt	c	599.99	8000	25	m	1965-11-30
+neha	horizon	java	275.25	4900	64	f	1972-05-17
+suman	zenith	ruby	425.50	7000	50	m	1969-09-22
+Jegan	blueprint	python	455.00	5800	48	m	1967-04-21
+
+9) select s.Software_Name, s.Title, s.Dev_in, s.Scost, s.Dcost, p.prof1 from software s 
+join programmer p on s.Software_Name = p.Programmer_Name
+where s.Dev_in != p.Prof1;
+
+Result:
+somdutt	parachutes	basic	399.95	6000	pascal
+meena	sunrise	java	299.50	5200	c
+kavita	blueprint	python	450.00	6800	java
+rahul	thunderbolt	c	599.99	8000	vb
+vikram	nightshade	perl	350.75	4300	sql
+neha	horizon	java	275.25	4900	html
+suman	zenith	ruby	425.50	7000	php
+Jegan	blueprint	python	455.00	5800	html
+
+10)select s.* from software s join programmer p on s.Software_Name = p.Programmer_Name
+where s.Dev_in != p.Prof1 and s.Dev_in != p.Prof2;
+
+Result:
+meena	sunrise	java	299.50	5200	60
+kavita	blueprint	python	450.00	6800	38
+rahul	thunderbolt	c	599.99	8000	25
+
+11) select distinct s.* ,p.sex ,st.splace from software s 
+join programmer p on s.Software_Name = p.Programmer_Name
+join Studies st on st.Sname = p.Programmer_Name
+where p.sex = "M" and st.splace = "sabhari";
+
+result:
+somdutt	parachutes	basic	399.95	6000	43	m	sabhari
+
+12) select P.programmer_name from programmer p
+left join software s on p.programmer_name = s.Software_Name
+where s.Software_Name is null;
+
+13)select p.Programmer_Name, sum(s.dcost) AS development_cost from programmer p
+join software s on p.Programmer_Name = s.Software_Name
+join studies st on s.Software_Name = st.Sname
+WHERE st.sname = "chennai";
+
+
+14) select doj, group_concat(Programmer_Name separator " , ") as joining_date from programmer
+group by doj
+having count(*) > 1;
+
+15) select prof2, group_concat(programmer_name separator " , ") as Programmers from programmer
+group by Prof2
+having count(*) >1;
+
+Result: 
+java		anil , neha
+python	meena , Jegan
+
+16) select st.splace, sum(s.sold) as Total_sales from software s	
+join studies st on s.Software_Name = st.SName
+group by st.Splace; 
+
+Result:
+sabhari	86
+trichy	110
+chennai	168
+delhi	76
+mumbai	50
+kolkata	94
+hyderabad	128
+
+17) select st.splace, max(s.dcost) as costliest_product from software s
+join studies st on s.Software_Name = st.SName
+group by st.Splace
+order by costliest_product desc limit 1 ;
+
+Result:
+mumbai	8000
+
+18) select distinct prof as unused_language from (
+    SELECT prof1 AS prof FROM Programmer UNION SELECT prof2 AS prof FROM Programmer
+) AS AllProficiencies
+where prof not in ( select distinct dev_in from software);
+
+Result:
+pascal
+vb
+sql
+html
+php
+c++
+c#
+
+19) select p.programmer_name, max(p.salary) as Maximum_salary, group_concat(distinct s.dev_in) as language, 
+group_concat(distinct st.course) as Course from programmer p
+join software s on p.Programmer_Name = s.Software_Name
+join studies st on p.Programmer_Name = st.sname
+group by p.salary, P.Programmer_Name,s.Dev_in
+order by Maximum_salary desc limit 1;
+
+Result:
+vikram	3700	perl	mca
+
+20) select p.programmer_name, s.course, round(s.ccost/(p.salary/12),2) as recovery_months
+from programmer p join studies s on p.Programmer_Name = s.SName;
+
+Result:
+somdutt	pgdca	16.88
+anil	bcom	10.97
+meena	msc	19.41
+kavita	mba	20.67
+rahul	be	25.45
+vikram	mca	15.57
+neha	bba	12.92
+somdutt	pgdca	16.88
+anil	bcom	10.97
+meena	msc	19.41
+kavita	mba	20.67
+rahul	be	25.45
+vikram	mca	15.57
+neha	bba	12.92
+Jegan	MBA	15.64
+
+21)select p.programmer_name, s.dcost as costliest_package, floor(datediff(curdate(),doj)/365) as Yrs_experience 
+from programmer p
+join software s on p.Programmer_Name = s.Software_Name
+where floor(datediff(curdate(),doj)/365) < 3
+order by costliest_package desc limit 1;
+
+22)select avg(p.salary) as Average_salary from programmer p 
+join software s on p.Programmer_Name = s.Software_Name
+where s.dcost > 5000;
+
+Result:
+3392.8571
+
+23)select count(*) as Number_of_package from software s join
+studies st on s.Software_Name = st.SName
+where st.Splace = (select min(ccost) as Lowest_course_fee from studies
+group by ccost
+order by Lowest_course_fee desc limit 1);
+
+24)
+SELECT MIN(dcost) AS Minimum_Cost
+INTO @Cheapest_Cost
+FROM Software;
+SELECT Software_Name
+INTO @Cheapest_Developer
+FROM Software
+WHERE dcost = @Cheapest_Cost;
+SELECT COUNT(*) AS Number_of_Packages,
+st.splace AS Institute FROM Software s 
+JOIN Programmer p ON s.Software_Name = p.Programmer_Name
+JOIN Studies st ON p.Programmer_Name = st.SName
+WHERE s.Software_Name = @Cheapest_Developer
+GROUP BY st.splace;
+
+Result:
+2	kolkata
+
+25) select P.programmer_name, p.sex, p.salary, count(s.Dev_in) as Number_of_packages, s.dev_in from programmer p 
+join software s on p.Programmer_Name = s.Software_Name
+where p.Sex = "F" and (select max(salary) from programmer where sex = "M")
+group by P.programmer_name, p.sex, p.salary,s.dev_in;
+
+Result:
+meena	f	3400	1	java
+kavita	f	3600	1	python
+neha	f	3250	1	java
+
+26) select count(s.dev_in) as Number_of_package, floor(datediff(curdate(),p.doj)/365) as years_of_experience,
+ st.splace  from programmer p join software s on p.Programmer_Name = s.Software_Name
+join studies st on p.Programmer_Name = st.SName
+where st.splace = "CHennai"
+group by p.DOJ, st.splace, s.dev_in
+order by years_of_experience desc limit 1;
+
+Result: 
+2	30	chennai
+
+27) select s.software_name as programmers, st.splace as institution, s.dev_in as langugae from software s 
+Left join studies st on s.Software_Name = st.SName
+where s.title is Null;
+
+28) select p.prof1, count(distinct p.programmer_name) as Number_of_programmer, count(Title) as Number_packages
+from programmer p Left join software s on p.Programmer_Name = s.Software_Name
+group by p.Prof1;
+
+result:
+c	1	1
+cobol	1	1
+html	2	2
+java	1	1
+pascal	1	1
+php	1	1
+sql	1	1
+vb	1	1
+
+
+29) select p.programmer_name, count(s.dev_in) from programmer p 
+join software s on p.Programmer_Name = s.Software_Name
+group by Programmer_Name;
+
+result:
+
+somdutt	1
+anil	1
+meena	1
+kavita	1
+rahul	1
+vikram	1
+neha	1
+suman	1
+Jegan	1
+
+30)select distinct P.* from programmer p 
+join studies s on p.Programmer_Name = s.SName
+where course = "MCA"
+
+Result:
+vikram	1971-02-10	1996-03-05	m	sql	perl	3700
+
+
+
